@@ -1,0 +1,80 @@
+USE_CAMERA_STUB := true
+
+# inherit from the proprietary version
+TARGET_SPECIFIC_HEADER_PATH := device/huawei/c8813q/include
+-include vendor/huawei/c8813q/BoardConfigVendor.mk
+
+TARGET_ARCH := arm
+TARGET_NO_BOOTLOADER := true
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := cortex-a5
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_BOARD_PLATFORM := msm7x27a
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno203
+
+TARGET_BOOTLOADER_BOARD_NAME := c8813q
+
+BOARD_KERNEL_CMDLINE := androidboot.hardware=huawei loglevel=1
+BOARD_KERNEL_BASE := 0x00200000
+BOARD_KERNEL_PAGESIZE := 2048
+
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+DEVICE_RESOLUTION := 480x854
+
+# Recovery
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/huawei/c8813q/recovery/recovery-keys.c
+TARGET_RECOVERY_INITRC := device/huawei/c8813q/recovery/init.rc
+BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_INTERNAL_STORAGE_PATH := "/sdcard"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+BOARD_USES_MMCUTILS := true
+
+# USB
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 19
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
+TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
+
+# Qualcomm hardware
+BOARD_USES_QCOM_HARDWARE := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP -DQCOM_HARDWARE
+TARGET_USES_ION := true
+TARGET_USES_QCOM_BSP := true
+BOARD_WANTS_EMMC_BOOT := true
+
+# Compiler flags
+TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a5
+TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon -mtune=cortex-a5
+
+# Graphics
+BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
+BOARD_EGL_CFG := device/huawei/c8813q/configs/egl.cfg
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+BOARD_USE_MHEAP_SCREENSHOT := true
+TARGET_DOESNT_USE_FENCE_SYNC := true
+TARGET_QCOM_DISPLAY_VARIANT := legacy
+USE_OPENGL_RENDERER := true
+
+# Lights
+TARGET_PROVIDES_LIBLIGHTS := true
+
+# Media
+TARGET_QCOM_LEGACY_MMPARSER := true
+TARGET_QCOM_MEDIA_VARIANT := legacy
+
+# fix this up by examining /proc/mtd on a running device
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+TARGET_PREBUILT_KERNEL := device/huawei/c8813q/kernel
+
+BOARD_HAS_NO_SELECT_BUTTON := true
